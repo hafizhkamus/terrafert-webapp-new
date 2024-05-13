@@ -41,11 +41,11 @@ class Welcome extends BaseController
 					]);
 					return redirect()->to(base_url('home'));
 				} else {
-					session()->setFlashdata('notif_error', $md5);
+					session()->setFlashdata('notif_error', 'username or password is wrong!');
 					return redirect()->to(base_url('login'));
 				}
 			} else {
-				session()->setFlashdata('notif_error', $inputPassword);
+				session()->setFlashdata('notif_error', 'username or password is wrong!');
 				return redirect()->to(base_url('login'));
 			}
 		}
