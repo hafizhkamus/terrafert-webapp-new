@@ -24,13 +24,16 @@ class Welcome extends BaseController
 		if (!$this->validate(['inputEmail'  => 'required'])) {
 			return view('common/login');
 		} else {
-			$inputEmail 		= htmlspecialchars($this->request->getVar('inputEmail', FILTER_UNSAFE_RAW));
+			$inputEmail 		= $this->request->getVar('inputEmail');
 			$inputPassword 		= htmlspecialchars($this->request->getVar('inputPassword', FILTER_UNSAFE_RAW));
 			$user 				= $this->userModel->getUser(username: $inputEmail);
 			if ($user) {
 				$password		= $user['password'];
-				$verify = password_verify($inputPassword, $password);
-				if ($verify) {
+				$salt = "v4XHriGxTmm3j+3+A/1S6U1ZDyP0hoRqOI99QJ7FaWkXMmDOyANPPUOQHVh/Ii/sLkoQ7ZDrrMFTBk47ukhLyMJaiaX4wZb5XiuDqiPDXo20O15pDkXtuIJY8vcwhlrrOlL+/5SraHUsCjXjokQoF5lo6Dhqhofqzikp1r6FKbJRl3d9R1dvZ5BHC6fkTs92ugdE40drPWHf4Yr45GodEIR8cfW9T7NIKvLNiPt1RrjmpxXDZ+sYG/UaoexgcXXp9zcw84TqMcDuTHGZFliE/Ra6v2TR2BXb+n9Qj83d1BpNMqPydimI/jvU8Gkojxcju9CSYSnz9KQnFzFAEiGENA==";
+				$md5 = md5($salt.$inputPassword);
+				echo $md5;
+				// $verify = verifyPass($inputPassword, $password);
+				if ($md5 == $password) {
 					session()->set([
 						'username'		=> $user['username'],
 						'role'			=> $user['role'],
@@ -38,15 +41,26 @@ class Welcome extends BaseController
 					]);
 					return redirect()->to(base_url('home'));
 				} else {
-					session()->setFlashdata('notif_error', '<b>Your ID or Password is Wrong !</b> ');
+					session()->setFlashdata('notif_error', $md5);
 					return redirect()->to(base_url('login'));
 				}
 			} else {
-				session()->setFlashdata('notif_error', '<b>Your ID or Password is Wrong!</b> ');
+				session()->setFlashdata('notif_error', $inputPassword);
 				return redirect()->to(base_url('login'));
 			}
 		}
 	}
+
+	// public function verifyPass($password, $actualpassword){
+	// 	$salt = "v4XHriGxTmm3j+3+A/1S6U1ZDyP0hoRqOI99QJ7FaWkXMmDOyANPPUOQHVh/Ii/sLkoQ7ZDrrMFTBk47ukhLyMJaiaX4wZb5XiuDqiPDXo20O15pDkXtuIJY8vcwhlrrOlL+/5SraHUsCjXjokQoF5lo6Dhqhofqzikp1r6FKbJRl3d9R1dvZ5BHC6fkTs92ugdE40drPWHf4Yr45GodEIR8cfW9T7NIKvLNiPt1RrjmpxXDZ+sYG/UaoexgcXXp9zcw84TqMcDuTHGZFliE/Ra6v2TR2BXb+n9Qj83d1BpNMqPydimI/jvU8Gkojxcju9CSYSnz9KQnFzFAEiGENA==";
+	// 	$md5 = md5($salt.$password);
+
+	// 	if($md5 == $actualpassword){
+	// 		return true;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
 	public function logout()
 	{
 		$this->session->destroy();

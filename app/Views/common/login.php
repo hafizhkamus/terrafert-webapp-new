@@ -37,7 +37,7 @@
                 </div>
                 <form action="<?= base_url('GetLogin'); ?>" method="POST">
                     <div class="mb-3 w-100 d-flex justify-content-center">
-                        <input class="form-control form-control-lg custom-box-shadow" type="email" name="inputEmail" style="" placeholder="Nama Pengguna" />
+                        <input class="form-control form-control-lg custom-box-shadow" type="text" name="inputEmail" style="" placeholder="Nama Pengguna" />
                     </div>
                     <div class="mb-3 w-100 d-flex justify-content-center">
                         <input class="form-control form-control-lg custom-box-shadow" type="password" name="inputPassword" placeholder="Kata Sandi" />

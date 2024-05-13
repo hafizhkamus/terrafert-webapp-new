@@ -9,22 +9,10 @@ class UserModel extends Model
 	public function getUser($username = false, $userID = false)
 	{
 		if ($username) {
-			return $this->db->table('users')
-				->select('*,users.id AS userID,user_role.id AS role_id')
-				->join('user_role', 'users.role = user_role.id')
-				->where(['username' => $username])
-				->get()->getRowArray();
-		} elseif ($userID) {
-			return $this->db->table('users')
-				->select('*,users.id AS userID,user_role.id AS role_id')
-				->join('user_role', 'users.role = user_role.id')
-				->where(['users.id' => $userID])
-				->get()->getRowArray();
-		} else {
-			return $this->db->table('users')
-				->select('*,users.id AS userID,user_role.id AS role_id')
-				->join('user_role', 'users.role = user_role.id')
-				->get()->getResultArray();
+			return $this->db->query('SELECT users.*, user_role.role_name
+			FROM users
+			JOIN user_role ON users.role = user_role.id
+			WHERE users.username = ?', $username)->getRowArray();
 		}
 	}
 
@@ -56,16 +44,32 @@ class UserModel extends Model
 			->get()->getResultArray();
 	}
 
+	// public function createUser($dataUser)
+	// {
+	// 	return $this->db->table('users')->insert([
+	// 		'fullname'		=> $dataUser['inputFullname'],
+	// 		'username' 		=> $dataUser['inputUsername'],
+	// 		'password' 		=> password_hash($dataUser['inputPassword'], PASSWORD_DEFAULT),
+	// 		'role' 			=> $dataUser['inputRole'],
+	// 		'created_at'    => date('Y-m-d h:i:s')
+	// 	]);
+	// }
+
+	
 	public function createUser($dataUser)
 	{
+		$salt = "v4XHriGxTmm3j+3+A/1S6U1ZDyP0hoRqOI99QJ7FaWkXMmDOyANPPUOQHVh/Ii/sLkoQ7ZDrrMFTBk47ukhLyMJaiaX4wZb5XiuDqiPDXo20O15pDkXtuIJY8vcwhlrrOlL+/5SraHUsCjXjokQoF5lo6Dhqhofqzikp1r6FKbJRl3d9R1dvZ5BHC6fkTs92ugdE40drPWHf4Yr45GodEIR8cfW9T7NIKvLNiPt1RrjmpxXDZ+sYG/UaoexgcXXp9zcw84TqMcDuTHGZFliE/Ra6v2TR2BXb+n9Qj83d1BpNMqPydimI/jvU8Gkojxcju9CSYSnz9KQnFzFAEiGENA==";
+		$password = $dataUser['inputPassword'];
+		$md5 = md5($salt.$password);
 		return $this->db->table('users')->insert([
 			'fullname'		=> $dataUser['inputFullname'],
 			'username' 		=> $dataUser['inputUsername'],
-			'password' 		=> password_hash($dataUser['inputPassword'], PASSWORD_DEFAULT),
+			'password' 		=> $md5,
 			'role' 			=> $dataUser['inputRole'],
 			'created_at'    => date('Y-m-d h:i:s')
 		]);
 	}
+
 	public function updateUser($dataUser)
 	{
 		if ($dataUser['inputPassword']) {
