@@ -91,7 +91,7 @@
                         </div>
                         <div>
                             <div style="font-size : 10px !important; color:black;">
-                                <strong>Natrium (N)</strong> 
+                                <strong>Nitrogen (N)</strong> 
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                         </div>
                         <div>
                             <div style="font-size : 10px !important; color:black;">
-                                <strong>Phosphorus (P)</strong> 
+                                <strong>Fosfor (P)</strong> 
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         </div>
                         <div>
                             <div style="font-size : 10px !important; color:black;">
-                                <strong>Potassium (K)</strong> 
+                                <strong>Kalium (K)</strong> 
                             </div>
                         </div>
                     </div>
