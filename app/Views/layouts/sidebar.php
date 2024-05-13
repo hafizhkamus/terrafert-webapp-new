@@ -1,21 +1,24 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="<?= base_url(); ?> ">
-            <span class="align-middle">CI4 - Starter Panel</span>
+        <a class="sidebar-brand" href="<?= base_url('/home'); ?> ">
+            <!-- <span class="align-middle">CI4 - Starter Panel</span> -->
+            <div class="w-100 text-center">
+                <img class="w-75" src="<?= base_url('assets/img/logo-3.png') ?>"/>
+            </div>
         </a>
         <ul class="sidebar-nav">
             <?php foreach ($MenuCategory as $mCategory) : ?>
-                <li class="sidebar-header">
+                <!-- <li class="sidebar-header">
                     <?= $mCategory['menu_category']; ?>
-                </li>
+                </li> -->
                 <?php
                 $Menu = getMenu($mCategory['menuCategoryID'], $user['role']);
                 foreach ($Menu as $menu) :
                     if ($menu['parent'] == 0) :
                 ?>
                         <li class="sidebar-item <?= ($segment == $menu['url']) ? 'active' : ''; ?>">
-                            <a class="sidebar-link" href="<?= base_url($menu['url']); ?> ">
-                                <i class="align-middle" data-feather="<?= $menu['icon']; ?>"></i> <span class="align-middle"><?= $menu['title']; ?></span>
+                            <a class="sidebar-link px-3 py-3" href="<?= base_url($menu['url']); ?> ">
+                                <i class="align-middle" data-feather="<?= $menu['icon']; ?>"></i> <span class="align-middle px-2"><?= $menu['title']; ?></span>
                             </a>
                         </li>
                     <?php

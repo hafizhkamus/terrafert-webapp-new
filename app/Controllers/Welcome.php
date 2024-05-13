@@ -10,7 +10,13 @@ class Welcome extends BaseController
 	{
 	}
 
+	
 	public function index()
+	{
+		return view('terrafert/landing');
+	}
+
+	public function login()
 	{
 		if (session()->get('isLoggedIn') == TRUE) {
 			return redirect()->to(base_url('home'));
@@ -33,18 +39,18 @@ class Welcome extends BaseController
 					return redirect()->to(base_url('home'));
 				} else {
 					session()->setFlashdata('notif_error', '<b>Your ID or Password is Wrong !</b> ');
-					return redirect()->to(base_url());
+					return redirect()->to(base_url('login'));
 				}
 			} else {
 				session()->setFlashdata('notif_error', '<b>Your ID or Password is Wrong!</b> ');
-				return redirect()->to(base_url());
+				return redirect()->to(base_url('login'));
 			}
 		}
 	}
 	public function logout()
 	{
 		$this->session->destroy();
-		return redirect()->to(base_url('/'));
+		return redirect()->to(base_url('login'));
 	}
 
 	public function forbiddenPage()

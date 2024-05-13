@@ -34,7 +34,8 @@ $routes->setAutoRoute(true);
 
 //Common Routes
 $routes->get('/', 'Welcome::index');
-$routes->post('GetLogin', 'Welcome::index');
+$routes->get('login', 'Welcome::login');
+$routes->post('GetLogin', 'Welcome::login');
 $routes->get('blocked', 'Welcome::forbiddenPage');
 $routes->get('register', 'Welcome::register');
 $routes->post('register', 'Welcome::registration');
@@ -59,6 +60,20 @@ $routes->post('menuManagement/createSubMenu', 'Developers\MenuManagement::create
 //Developer Routes
 $routes->get('menuManagement', 'Developers\MenuManagement::index');
 $routes->get('crudGenerator', 'Developers\CRUDGenerator::index');
+
+//Alat
+$routes->delete('alat/delete', 'Alat::delete');
+$routes->post('alat/save', 'Alat::save');
+$routes->post('alat/update', 'Alat::update');
+
+//Histori
+$routes->post('histori/filterHistory', 'Histori::filterDeviceByMonth');
+
+//Grafik
+$routes->post('grafik/getGrafikByParam', 'Grafik::filters');
+
+//Map
+$routes->post('map/getAllDevices', 'Map::getDevices');
 
 /*
  * --------------------------------------------------------------------

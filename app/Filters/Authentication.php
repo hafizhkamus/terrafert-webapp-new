@@ -12,7 +12,7 @@ class Authentication implements FilterInterface
 	public function before(RequestInterface $request, $arguments = null)
 	{
 		if (session()->get('isLoggedIn') != TRUE) :
-			return redirect()->to(base_url('/'));
+			return redirect()->to(base_url('login'));
 		endif;
 	}
 	public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

@@ -1,13 +1,21 @@
 <footer class="footer">
     <div class="container-fluid">
         <div class="row text-muted">
-            <div class="col-6 text-start">
-                <p class="mb-0">
-                    <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>CI4 - Starter Panel</strong></a> &copy; Gheav <?= date('Y'); ?> | Page rendered in {elapsed_time} seconds | Environment: <?= ucfirst(ENVIRONMENT) ?>
-                </p>
+            <div class="col-9 text-start d-flex justify-content-start align-items-center" style="text-shadow: 2px 2px black;">
+                Optimalkan Hasil Panen Bersama Terrafert: Puncak Kesuburan Tanah untuk Sukses Agrikurtur
             </div>
-            <div class="col-6 text-end">
-                <ul class="list-inline">
+            <div class="col-3">
+                <div>
+                    <label>
+                        Contact : agrooptim@gmail.com
+                    </label>
+                </div>
+                <div>
+                    <label for="">
+                        Telkom University
+                    </label>
+                </div>
+                <!-- <ul class="list-inline">
                     <li class="list-inline-item">
                         <a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
                     </li>
@@ -20,7 +28,7 @@
                     <li class="list-inline-item">
                         <a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>

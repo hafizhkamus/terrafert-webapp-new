@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\UserModel;
+use App\Models\AlatModel;
 use App\Models\MenuModel;
 
 
@@ -42,6 +43,7 @@ class BaseController extends Controller
 
 	protected $data 	= [];
 	protected $userModel;
+	protected $alatModel;
 	protected $session;
 	protected $segment;
 	protected $db;
@@ -61,6 +63,7 @@ class BaseController extends Controller
 		$this->validation 	= \Config\Services::validation();
 		$this->encrypter 	= \Config\Services::encrypter();
 		$this->userModel  	= new UserModel();
+		$this->alatModel  	= new AlatModel();
 		$this->menuModel  	= new MenuModel();
 		$user 				= $this->userModel->getUser(username: session()->get('username'));
 		$segment 			= $this->request->uri->getSegment(1);

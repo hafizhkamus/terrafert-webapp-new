@@ -22,7 +22,7 @@ class Authorization implements FilterInterface
 			$menu 		= $this->menuModel->getMenuByUrl($segment);
 			if (!$menu) :
 				//not found
-				return redirect()->to(base_url('/'));
+				return redirect()->to(base_url('login'));
 			else :
 				$dataAccess = [
 					'roleID' => session()->get('role'),
